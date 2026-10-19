@@ -1,0 +1,19 @@
+{
+  "name": "jianyingcraft",
+  "version": "0.1.0",
+  "description": "JianyingCraft 智能剪辑工作流：在智能体宿主内打开剪映草稿时间轴编辑器并交付可编辑工程。",
+  "author": {
+    "name": "Full AIGC Plugins",
+    "url": "https://github.com/full-aigc-plugins"
+  },
+  "homepage": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "repository": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-plugin",
+    "jianyingcraft",
+    "video-editing",
+    "jianying"
+  ],
+  "skills": "./skills/"
+}

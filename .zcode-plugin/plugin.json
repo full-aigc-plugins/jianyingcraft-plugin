@@ -1,0 +1,22 @@
+{
+  "name": "jianyingcraft",
+  "version": "0.1.0",
+  "description": "JianyingCraft creative workflows with an embedded Jianying draft timeline editor; development release, full domain and host acceptance pending.",
+  "author": {
+    "name": "Full AIGC Plugins",
+    "url": "https://github.com/full-aigc-plugins"
+  },
+  "homepage": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "repository": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-plugin",
+    "jianyingcraft",
+    "video-editing",
+    "development-release"
+  ],
+  "skills": "./skills/",
+  "displayName": "JianyingCraft Use",
+  "icon": "./assets/official-logo.png",
+  "mcpServers": "./.mcp.json"
+}

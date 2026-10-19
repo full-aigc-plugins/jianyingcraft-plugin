@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JianyingCraft 编辑器</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 13px/1.5 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; background: #14161a; color: #e6e8ec; }
+  header { display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: #1c1f26; border-bottom: 1px solid #2b303a; flex-wrap: wrap; }
+  header b { font-weight: 600; }
+  .badge { padding: 1px 8px; border-radius: 10px; font-size: 11px; background: #2b303a; }
+  .badge.ok { background: #1d4d33; color: #7ee2a8; }
+  .badge.bad { background: #5a2530; color: #ff9aa8; }
+  main { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.4fr); gap: 10px; padding: 10px; }
+  section { background: #1c1f26; border: 1px solid #2b303a; border-radius: 6px; overflow: hidden; }
+  section > h3 { margin: 0; padding: 6px 10px; font-size: 12px; font-weight: 600; color: #9aa3b2; background: #20242c; border-bottom: 1px solid #2b303a; }
+  .pad { padding: 8px 10px; }
+  #preview { width: 100%; background: #0d0f12; display: block; aspect-ratio: 16/9; }
+  #timeline { width: 100%; display: block; cursor: pointer; }
+  #gaps { max-height: 130px; overflow: auto; font-size: 12px; }
+  #gaps li { margin: 0 0 4px; color: #ffcf8b; }
+  #gaps ul { margin: 4px 0; padding-left: 18px; }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; font-size: 12px; }
+  dt { color: #9aa3b2; }
+  dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .empty { color: #6d7686; font-style: italic; }
+</style>
+</head>
+<body>
+<header>
+  <b>JianyingCraft</b>
+  <span id="engine" class="badge">引擎未加载</span>
+  <span id="conn" class="badge">面板未连接</span>
+  <span id="rev" class="badge">rev 0</span>
+  <span id="draft" class="badge">未选择草稿</span>
+</header>
+<main>
+  <section>
+    <h3>代理预览（ffmpeg render proxy 真实产物）</h3>
+    <div class="pad">
+      <video id="preview" controls preload="metadata"></video>
+      <p id="proxyNote" class="empty">尚未生成代理。执行 <code>jianying render proxy &lt;草稿&gt; --json</code> 后刷新。</p>
+    </div>
+  </section>
+  <section>
+    <h3>时间轴（只读，反映真实 draft_content.json）</h3>
+    <div class="pad"><canvas id="timeline" height="220"></canvas></div>
+  </section>
+  <section style="grid-column: 1 / -1;">
+    <h3>草稿事实</h3>
+    <div class="pad">
+      <dl id="facts"></dl>
+      <div id="gaps"></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

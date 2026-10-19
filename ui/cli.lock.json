@@ -1,0 +1,42 @@
+{
+  "schema": "jianying-plugin-cli-lock/v1",
+  "artifact": "jianying-cli",
+  "repository": "full-aigc-plugins/jianying-cli",
+  "minimumVersion": "1.6.19",
+  "resolvedVersion": "1.6.31",
+  "releaseRef": "v1.6.31",
+  "capabilitySchema": "jianying-capabilities/v1",
+  "jobSchema": "jianying-job/v2",
+  "requiredCapabilities": [
+    "capabilities",
+    "schema.job_v2",
+    "job.run"
+  ],
+  "sourceCommit": "6fe623096f1ce281d5f0a06f93ca23989b901cff",
+  "artifacts": {
+    "darwin-arm64": {
+      "url": "https://github.com/full-aigc-plugins/jianying-cli/releases/download/v1.6.31/jianying-cli-1.6.31-darwin-arm64.tar.gz",
+      "archiveSha256": "76f4f2dc397519ab967f4939915045b441f9d3bcf36c5114d291336acf036757",
+      "binarySha256": "99a65ef0ac9e3dfd1dc5c3dac77fe343ab69cdb2584e0fea6dfef8ce1902fcde",
+      "capabilityManifestSha256": "70560f189a639c6efa1c0d5a3a308f5442e06ac0dd5aafb049dcfdfa90a30336",
+      "sbomSha256": "ec0950ef71b8724f5fad8c5f90a3654f4e5fad4f792bdab5d1c7000912fca4a6",
+      "sha256": "99a65ef0ac9e3dfd1dc5c3dac77fe343ab69cdb2584e0fea6dfef8ce1902fcde"
+    },
+    "darwin-x64": {
+      "url": "https://github.com/full-aigc-plugins/jianying-cli/releases/download/v1.6.31/jianying-cli-1.6.31-darwin-x64.tar.gz",
+      "archiveSha256": "8fd5e59fd8fe43cfff02b3c5f3bce05bd3c0d36caace1301f571b49d574ba861",
+      "binarySha256": "2f0eb0eccb036de9bf4fa0a8aad00e144fb78cc3818802724db9b9a784ef3601",
+      "capabilityManifestSha256": "70560f189a639c6efa1c0d5a3a308f5442e06ac0dd5aafb049dcfdfa90a30336",
+      "sbomSha256": "ec0950ef71b8724f5fad8c5f90a3654f4e5fad4f792bdab5d1c7000912fca4a6",
+      "sha256": "2f0eb0eccb036de9bf4fa0a8aad00e144fb78cc3818802724db9b9a784ef3601"
+    },
+    "win32-x64": {
+      "url": "https://github.com/full-aigc-plugins/jianying-cli/releases/download/v1.6.31/jianying-cli-1.6.31-win32-x64.zip",
+      "archiveSha256": "cdb67e7ce4e26a92abcd304630002ea1ba115afb785761368cf7f5dfe1c766a0",
+      "binarySha256": "fdda1e76dd0a4d63faafee5fd808e89f44186e392f50fb3a5b4787de61956980",
+      "capabilityManifestSha256": "7971d9c085f9be4a941daa6393723b3803b6c9862697adb06e7af6d01af52088",
+      "sbomSha256": "c84ecd85f6d6232c9c8ff055c2f0fd1c0e0765a23719c5f8c3f8b7fddf10634c",
+      "sha256": "fdda1e76dd0a4d63faafee5fd808e89f44186e392f50fb3a5b4787de61956980"
+    }
+  }
+}

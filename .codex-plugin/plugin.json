@@ -1,0 +1,29 @@
+{
+  "name": "jianyingcraft",
+  "version": "0.1.0",
+  "description": "JianyingCraft creative workflows with an embedded Jianying draft timeline editor.",
+  "author": {
+    "name": "Full AIGC Plugins",
+    "url": "https://github.com/full-aigc-plugins"
+  },
+  "homepage": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "repository": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-plugin",
+    "jianyingcraft",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.codex-plugin/mcp.json",
+  "interface": {
+    "displayName": "JianyingCraft Use",
+    "shortDescription": "在智能体里打开剪映草稿时间轴，直接剪辑并交付可编辑工程。",
+    "category": "video",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ]
+  }
+}

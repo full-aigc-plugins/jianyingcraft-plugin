@@ -1,0 +1,15 @@
+{
+  "name": "jianyingcraft",
+  "version": "0.1.0",
+  "description": "JianyingCraft 智能剪辑：在 Codex / ZCode / Kimi / Claude Code 内打开剪映草稿时间轴编辑器，按场景技能完成可编辑交付。",
+  "author": {
+    "name": "Full AIGC Plugins",
+    "url": "https://github.com/full-aigc-plugins"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-plugin",
+    "jianyingcraft",
+    "video-editing"
+  ]
+}

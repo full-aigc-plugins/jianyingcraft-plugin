@@ -1,0 +1,19 @@
+{
+  "schema": "jianyingcraft-engine-lock/v1",
+  "name": "jianyingcraft",
+  "version": "0.1.0",
+  "mode": "self-built",
+  "repository": "full-aigc-plugins/jianyingcraft",
+  "sourceCommit": null,
+  "crates": {
+    "core": "crates/jianyingcraft-core",
+    "wasm": "crates/jianyingcraft-wasm"
+  },
+  "artifacts": {},
+  "notes": "与 photocraft 的 editor.lock.json 不同：photocraft 引用上游已 Web 化的编辑器产物，JianyingCraft 的引擎自研，因此本文件登记的是自产制品的摘要链。artifacts 由 build.mjs 在构建后写入。",
+  "hostCli": {
+    "name": "jianying-cli",
+    "lock": "cli.lock.json",
+    "role": "宿主侧运行时：render proxy 预览、verify 结构校验、publish 草稿库发布。剪辑动作本身由可见引擎执行，不经 CLI。"
+  }
+}

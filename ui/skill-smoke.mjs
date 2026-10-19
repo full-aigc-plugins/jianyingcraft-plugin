@@ -188,6 +188,33 @@ check('batch-remix-failure', () => {
   if (!/not available/i.test(String(first.error))) throw new Error(`the error is not readable: ${first.error}`);
   return { status: attempt.status, error: String(first.error).slice(0, 80) };
 });
+
+/**
+ * 场景 3b：图文成片的外部素材导入（openspec「图文成片未覆盖」里的 `file.import` 部分）。
+ *
+ * `--demo` 每次启动都是同一份工程，所以第一件导入素材的 id 是确定的；这里先断言它是 48，
+ * 再用它上轨——如果哪天 demo 工程变了，失败信息会直接指出新的 id，而不是悄悄换断言。
+ * 中文配音仍受限于 `tts.voices` 只有 en-US，不在本用例覆盖范围。
+ */
+check('text-to-video-external-import', () => {
+  const png = at('external.png');
+  writeFileSync(png, Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64'));
+  const attempt = run_capture([
+    { id: 'file.import', params: { path: png } },
+    { id: 'timeline.place', params: { item: 48, track: 'V1', seconds: 0 } },
+    { id: 'sequence.inspect', params: {} },
+  ]);
+  if (attempt.status !== 0) throw new Error(`the import script failed: ${JSON.stringify(attempt.lines)}`);
+  const lines = attempt.lines;
+  const imported = lines.find((line) => line.id === 'file.import')?.result ?? {};
+  const itemId = (imported.items ?? [])[0];
+  if (itemId !== 48) throw new Error(`the first imported item id is ${itemId}, expected 48: update the script's timeline.place`);
+  if ((imported.errors ?? []).length > 0) throw new Error(`import reported errors: ${JSON.stringify(imported.errors)}`);
+  const sequence = lines.find((line) => line.id === 'sequence.inspect')?.result ?? {};
+  const clipItems = (sequence.video ?? []).flatMap((track) => track.items ?? []).map((clip) => clip.item);
+  if (!clipItems.includes(itemId)) throw new Error(`the imported item ${itemId} is not on the timeline: ${JSON.stringify(clipItems)}`);
+  return { item: itemId, clips: clipItems.length, importedBytes: stat_sync(png) };
+});
 function require_read(path) {
   return execFileSync(process.execPath, ['-e', `process.stdout.write(require('fs').readFileSync(${JSON.stringify(path)}, 'utf8'))`], { encoding: 'utf8' });
 }

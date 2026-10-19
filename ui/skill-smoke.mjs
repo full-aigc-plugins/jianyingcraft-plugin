@@ -5,7 +5,9 @@
 //   FILMCRAFT_CLI=<abs>/target/debug/filmcraft-cli.exe node ui/skill-smoke.mjs
 //
 // 缺 CLI 时 skip（退出 0）。每个场景都断言"结果 + 落盘产物"，不只看命令返回 ok。
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { mkdtemp, readFile, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -118,6 +120,74 @@ check('text-to-video', () => {
   return { width, height, frames: sequence.durationFrames, captions, videoClips, videoBytes: stat_sync(video), offline: (exported.offlineMedia ?? []).length };
 });
 
+
+/** 把命令写成 jsonl 并跑一遍，**允许失败**：返回退出码与逐行结果（失败注入用例需要）。 */
+function run_capture(lines) {
+  const path = at(`script-${Math.random().toString(16).slice(2)}.jsonl`);
+  writeFileSync(path, lines.map((line) => JSON.stringify(line)).join('\n'), 'utf8');
+  const result = spawnSync(cli, ['--demo', 'run', path], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  const parsed = (result.stdout ?? '')
+    .trim()
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => JSON.parse(line));
+  return { status: result.status, lines: parsed, stderr: result.stderr ?? '' };
+}
+
+function sha256(path) {
+  return createHash('sha256').update(readFileSync(path)).digest('hex');
+}
+
+/**
+ * 场景 2b：批量混剪的 N 条循环 + 清单 + 失败注入（openspec 里「批量混剪未覆盖」的可做部分）。
+ *
+ * 每轮：替换占位片段 → 改速度（让每轮产物真的不同）→ 保存工作副本 → 导出；
+ * 清单逐行记录产物名、sha256 与字节数，最后回读清单核对。失败注入不需要 ffprobe：
+ * 用一条不存在的素材 id，断言 CLI 以 `ok:false` 退出 1 而不是静默成功。
+ */
+check('batch-remix-loop', () => {
+  const manifest = [];
+  for (let loop = 0; loop < 3; loop++) {
+    const copy = at(`loop-${loop}.fcproj`);
+    const video = at(`loop-${loop}.mp4`);
+    const speed = 1 + loop * 0.15;
+    const lines = run([
+      { id: 'clip.replaceFromBin', params: { clips: [29], item: 6 } },
+      { id: 'clip.speedDuration', params: { clips: [29], speed } },
+      { id: 'file.saveCopy', params: { path: copy } },
+      { id: 'file.exportMedia', params: { path: video, wait: true, preset: presets } },
+    ]);
+    const replaced = lines.find((line) => line.id === 'clip.replaceFromBin')?.result?.clips ?? [];
+    const exported = lines.find((line) => line.id === 'file.exportMedia')?.result ?? {};
+    if (!replaced.includes(29)) throw new Error(`loop ${loop}: clip 29 was not replaced`);
+    if ((exported.offlineMedia ?? []).length > 0) throw new Error(`loop ${loop}: export used offline media`);
+    if (stat_sync(copy) <= 0 || stat_sync(video) <= 0) throw new Error(`loop ${loop}: an artifact is empty`);
+    manifest.push({ loop, speed, copy: `loop-${loop}.fcproj`, copySha: sha256(copy), video: `loop-${loop}.mp4`, videoSha: sha256(video), videoBytes: stat_sync(video) });
+  }
+  const manifestPath = at('manifest.jsonl');
+  writeFileSync(manifestPath, manifest.map((entry) => JSON.stringify(entry)).join('\n'), 'utf8');
+  const reread = readFileSync(manifestPath, 'utf8').trim().split('\n').filter(Boolean).map((line) => JSON.parse(line));
+  if (reread.length !== manifest.length) throw new Error(`manifest has ${reread.length} lines, expected ${manifest.length}`);
+  for (const entry of reread) {
+    if (entry.copySha !== sha256(at(entry.copy))) throw new Error(`manifest sha mismatch for ${entry.copy}`);
+    if (entry.videoSha !== sha256(at(entry.video))) throw new Error(`manifest sha mismatch for ${entry.video}`);
+    if (!(entry.videoBytes > 0)) throw new Error(`manifest says ${entry.video} is empty`);
+  }
+  // 每轮都改了速度：三份导出必须互不相同，否则"循环"只是复制了同一个产物。
+  const hashes = new Set(reread.map((entry) => entry.videoSha));
+  if (hashes.size !== reread.length) throw new Error(`the ${reread.length} loops produced ${hashes.size} distinct videos`);
+  return { loops: reread.length, distinct: hashes.size, manifestBytes: readFileSync(manifestPath).length };
+});
+
+/** 场景 2c：失败注入——不存在的素材 id 必须让 CLI 以 ok:false 退出 1，且错误可读。 */
+check('batch-remix-failure', () => {
+  const attempt = run_capture([{ id: 'clip.replaceFromBin', params: { clips: [29], item: 999999 } }]);
+  if (attempt.status !== 1) throw new Error(`expected exit 1, got ${attempt.status}`);
+  const first = attempt.lines[0];
+  if (!first || first.ok !== false) throw new Error(`expected an ok:false line, got ${JSON.stringify(attempt.lines)}`);
+  if (!/not available/i.test(String(first.error))) throw new Error(`the error is not readable: ${first.error}`);
+  return { status: attempt.status, error: String(first.error).slice(0, 80) };
+});
 function require_read(path) {
   return execFileSync(process.execPath, ['-e', `process.stdout.write(require('fs').readFileSync(${JSON.stringify(path)}, 'utf8'))`], { encoding: 'utf8' });
 }

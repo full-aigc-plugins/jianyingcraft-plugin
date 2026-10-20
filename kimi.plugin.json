@@ -6,6 +6,8 @@
     "name": "Full AIGC Plugins",
     "url": "https://github.com/full-aigc-plugins"
   },
+  "homepage": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
+  "repository": "https://github.com/full-aigc-plugins/jianyingcraft-plugin",
   "license": "Apache-2.0",
   "skills": "./skills/",
   "mcpServers": {

@@ -22,7 +22,7 @@ test('the engine wasm satisfies the panel bridge contract', { skip: wasmJs ? fal
   const engine = require(wasmJs);
   const bridge = createEditorBridge(engine);
 
-  // 1) 目录同源：wasm 的命令数与 CLI 一致（701）。
+  // 1) 目录同源：wasm 的命令数与 CLI 一致（702）。
   const catalog = bridge.catalog();
   assert.ok(catalog.commands.length >= 700, `expected the full command catalog, got ${catalog.commands.length}`);
   assert.ok(catalog.commands.every((c) => typeof c.id === 'string' && c.id.includes('.')), 'every command needs a namespaced id');

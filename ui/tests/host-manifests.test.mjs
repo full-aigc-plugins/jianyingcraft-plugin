@@ -98,3 +98,10 @@ test('静态校验不冒充真机验收', () => {
   const hasHostDoc = /(ZCode|Codex|Kimi)/i.test(readme);
   assert.ok(hasHostDoc, 'the README should name the supported hosts so the gap is visible');
 });
+test('Kimi 的项目级 MCP 配置指向同一份 adapter', () => {
+  const cfg = read('.kimi-code/mcp.json');
+  const server = cfg.mcpServers?.['jianyingcraft-editor'];
+  assert.ok(server, 'kimi mcp.json 应注册 jianyingcraft-editor');
+  assert.equal(server.command, 'node');
+  assert.deepEqual(server.args, ['ui/dist/adapter.mjs']);
+});

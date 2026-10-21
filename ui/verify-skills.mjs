@@ -33,11 +33,18 @@ if (catalog.size === 0) {
   process.exit(2);
 }
 
+/** 反引号里这些是字段路径/文件名，不是引擎命令 id，不参与校验。 */
+const NON_COMMAND = [
+  /^(params|target|props|at|duration|meta|action|resource|ui|plan)\./,
+  /\.(json|md|mjs|mp3|wav|png|jpe?g|srt|vtt|cube|3dl|fcproj)$/,
+];
+
 /** 技能里 `namespace.command` 形式的反引号 id；"禁止"章节里的原型命令不算引用。 */
 function citedIds(markdown) {
   const body = markdown.split(/^##\s*禁止/m)[0];
   const ids = new Set();
   for (const match of body.matchAll(/`([a-z][a-zA-Z0-9]*\.[a-zA-Z0-9]+)`/g)) {
+    if (NON_COMMAND.some((pattern) => pattern.test(match[1]))) continue;
     ids.add(match[1]);
   }
   return [...ids].sort();

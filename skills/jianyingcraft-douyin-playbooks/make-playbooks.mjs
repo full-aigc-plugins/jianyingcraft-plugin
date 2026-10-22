@@ -1,0 +1,45 @@
+import { writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+const dir = 'E:/workspaces/workspace-agent-skills/full-aigc-plugins-repositories/jianyingcraft-plugin/skills/jianyingcraft-douyin-playbooks';
+const playbooks = {
+  schema: 'jianyingcraft-douyin-playbooks/v1',
+  note: '剪映/抖音场景化剪辑配方。参数是可执行建议，不是平台官方规则；每条都给出镜头结构、资源类型与检查点。',
+  playbooks: [
+    { id: 'beat-cut', name: '卡点变装/节奏卡点', duration_s: [7, 15], fps: 30,
+      beats: [ { at: 0.0, purpose: '钩子：半身/背影 0.4s', shot: '近景固定' }, { at: 0.15, purpose: '第一拍换装/换景' }, { at: 0.5, purpose: '第二拍放大动作' }, { at: 0.85, purpose: '定格 + 标题' } ],
+      shot_s: [0.4, 0.6, 0.8], transition: ['叠化', '泛白'], filter: ['清晰明亮', '日系奶油'], effect: ['CCD闪光', '光斑飘落'],
+      text: '标题 4–6 字，白字黑边，出现 0.3s 内', subtitle: '只在最后一句上字幕', audio: 'BGM 强拍对齐切点，前 0.3s 静音制造期待', check: '每个切点落在鼓点 ±2 帧内' },
+    { id: 'talking-head', name: '口播知识/观点', duration_s: [30, 60], fps: 30,
+      beats: [ { at: 0, purpose: '3 秒钩子：结论先行' }, { at: 0.1, purpose: '问题/反常识' }, { at: 0.3, purpose: '三点论据' }, { at: 0.85, purpose: '总结 + 关注引导' } ],
+      shot_s: [3, 6], transition: ['叠化'], filter: ['清晰明亮', '清新'], effect: [],
+      text: '关键词花字每 5–7 秒一次；标题不超过 12 字', subtitle: '全程字幕，单行 ≤16 字', audio: '人声 -6dB 为主，BGM -22dB 铺底', check: '字幕与口播逐句对齐；花字不遮脸' },
+    { id: 'food-street', name: '美食探店/餐饮混剪', duration_s: [15, 30], fps: 30,
+      beats: [ { at: 0, purpose: '成品特写钩子' }, { at: 0.15, purpose: '环境/门头' }, { at: 0.35, purpose: '制作过程快切' }, { at: 0.7, purpose: '入口反应' }, { at: 0.9, purpose: '价格/地址' } ],
+      shot_s: [1.2, 2.5], transition: ['叠化', '渐变擦除'], filter: ['暖食', '清晰明亮'], effect: ['光晕', '光斑虚化'],
+      text: '价格、招牌菜用花字；结尾加地址贴纸', subtitle: '描述口感短句', audio: '环境声+轻快 BGM；翻烤/切菜拟音保留', check: '食物特写曝光正常，不灰不糊' },
+    { id: 'travel-vlog', name: '旅行 vlog/周末短途', duration_s: [30, 90], fps: 30,
+      beats: [ { at: 0, purpose: '目的地大景 + 一句钩子' }, { at: 0.1, purpose: '路线/交通信息卡' }, { at: 0.3, purpose: '3 个高光点' }, { at: 0.75, purpose: '情绪空镜' }, { at: 0.9, purpose: '花费/建议' } ],
+      shot_s: [2, 5], transition: ['渐变擦除', '拉远', '叠化'], filter: ['夏日小美好', '胶片'], effect: ['丁达尔光线', '光晕'],
+      text: '地点名 + 天数；数字用大字号', subtitle: '旁白式短句', audio: 'BGM 情绪递进；转场处加 whoosh', check: '地点/价格信息真实，不夸张' },
+    { id: 'story-twist', name: '剧情反转', duration_s: [20, 45], fps: 30,
+      beats: [ { at: 0, purpose: '冲突开场（结果先给）' }, { at: 0.2, purpose: '铺垫/误会' }, { at: 0.6, purpose: '反转点' }, { at: 0.85, purpose: '收尾金句' } ],
+      shot_s: [1.5, 4], transition: ['叠化', '闪白'], filter: ['电影感', '清晰明亮'], effect: ['CCD闪光'], text: '角色台词用气泡；反转处加“等等”花字', subtitle: '对白字幕', audio: '环境声 + 反转音效（riser/impact）', check: '反转点前 0.5s 留白' },
+    { id: 'tutorial-3step', name: '教程/三步法', duration_s: [20, 45], fps: 30,
+      beats: [ { at: 0, purpose: '结果展示' }, { at: 0.1, purpose: '第 1 步' }, { at: 0.4, purpose: '第 2 步' }, { at: 0.7, purpose: '第 3 步' }, { at: 0.9, purpose: '复述要点' } ],
+      shot_s: [2, 4], transition: ['叠化'], filter: ['清晰明亮'], effect: [], text: '步骤数字 1/2/3 大号；每步一个动词', subtitle: '步骤说明', audio: 'BGM 低，保留操作声', check: '每步有可见的结果变化' },
+    { id: 'product-review', name: '产品测评/开箱', duration_s: [30, 60], fps: 30,
+      beats: [ { at: 0, purpose: '成品/上身效果' }, { at: 0.1, purpose: '开箱细节' }, { at: 0.35, purpose: '3 个优点' }, { at: 0.65, purpose: '1 个缺点' }, { at: 0.85, purpose: '购买建议' } ],
+      shot_s: [2, 4], transition: ['叠化'], filter: ['清晰明亮', '日系奶油'], effect: ['光晕'], text: '参数用表格/花字；优缺点用对勾/叉', subtitle: '口语化点评', audio: 'BGM -24dB；撕膜/按键拟音突出', check: '缺点必须真实，不做绝对化承诺' },
+    { id: 'pet-daily', name: '萌宠日常', duration_s: [10, 30], fps: 30,
+      beats: [ { at: 0, purpose: '萌点特写' }, { at: 0.2, purpose: '动作/意外' }, { at: 0.6, purpose: '互动' }, { at: 0.85, purpose: '表情定格' } ],
+      shot_s: [1, 2.5], transition: ['叠化', '星星'], filter: ['清新', '日系奶油'], effect: ['仙尘闪闪', '光斑飘落'], text: '拟人化台词 6–10 字', subtitle: '内心 OS', audio: '轻快 BGM + 动物原声', check: '不摆拍、不惊吓动物' },
+    { id: 'graduation', name: '毕业/纪念', duration_s: [30, 60], fps: 30,
+      beats: [ { at: 0, purpose: '校园空镜 + 标题' }, { at: 0.15, purpose: '群像/合照' }, { at: 0.45, purpose: '三年片段快闪' }, { at: 0.75, purpose: '抛帽/定格' }, { at: 0.9, purpose: '祝福字幕' } ],
+      shot_s: [2, 4], transition: ['叠化', '泛白', '拉远'], filter: ['胶片', '夏日小美好'], effect: ['光晕', '光斑飘落'], text: '名字/年份花字', subtitle: '祝福句', audio: '钢琴/弦乐 BGM，结尾留 0.5s 静音', check: '人脸清晰、不逆光死黑' },
+    { id: 'fitness-checkin', name: '健身打卡/自律', duration_s: [15, 30], fps: 30,
+      beats: [ { at: 0, purpose: '身材/动作对比' }, { at: 0.2, purpose: '训练过程加速' }, { at: 0.6, purpose: '数据/天数' }, { at: 0.85, purpose: '鼓励语' } ],
+      shot_s: [0.8, 2], transition: ['叠化', '闪白'], filter: ['清晰明亮'], effect: ['CCD闪光'], text: '天数/组数数据花字', subtitle: '动作要点', audio: '强节奏 BGM，动作声对齐重拍', check: '动作示范安全、无危险引导' },
+  ],
+};
+writeFileSync(join(dir, 'playbooks.json'), JSON.stringify(playbooks, null, 2) + '\n');
+console.log('playbooks written');

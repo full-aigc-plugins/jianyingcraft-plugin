@@ -1,0 +1,28 @@
+{
+  "schema": "jianyingcraft-batch/v1",
+  "name": "example-batch",
+  "playbook": "image-card",
+  "canvas": { "width": 1080, "height": 1920, "fps": 30 },
+  "defaults": {
+    "bgm": "E:/work/audio/bgm.wav",
+    "filter": "清晰明亮",
+    "effect": "光晕",
+    "transition": "叠化"
+  },
+  "briefs": [
+    {
+      "id": "case-01",
+      "title": "18岁的夏天",
+      "lines": ["青春是什么", "是操场上追风的少年"],
+      "images": ["E:/work/media/a.jpg", "E:/work/media/b.jpg", "E:/work/media/c.jpg"],
+      "duration_s": 9
+    },
+    {
+      "id": "case-02",
+      "title": "少年不散场",
+      "lines": ["是窗外偷走的晚霞"],
+      "images": ["E:/work/media/d.jpg", "E:/work/media/e.jpg"],
+      "duration_s": 6
+    }
+  ]
+}

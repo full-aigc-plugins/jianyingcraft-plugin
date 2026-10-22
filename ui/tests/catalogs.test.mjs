@@ -175,7 +175,7 @@ test('技能里引用的 catalog JSON 文件名都真实存在', async () => {
   for (const skill of SKILLS) {
     const markdown = await readFile(join(SKILLS_DIR, skill, 'SKILL.md'), 'utf8');
     const referenced = new Set(
-      [...markdown.matchAll(/(?:catalogs\/)?([a-z][a-z0-9_]+\.json)/g)].map((match) => match[1]),
+      [...markdown.matchAll(/catalogs\/([a-z][a-z0-9_]+\.json)/g)].map((match) => match[1]),
     );
     for (const file of referenced) {
       assert.ok(available.has(file), `${skill} 引用了不存在的 catalog 文件: ${file}`);

@@ -50,6 +50,11 @@ const plan = {
     { type: 'audio', name: '背景音乐', segments: [{ start_us: 0, duration_us: 30000000, source: join(dir, 'audio', 'bgm-youth-30s.wav'), volume: 0.85, fade: { in_us: 500000, out_us: 900000 } }] },
     { type: 'audio', name: '音效', segments: sfx },
     { type: 'text', name: '花字', segments: textSegments },
+    { type: 'sticker', name: '贴纸', segments: [
+      { start_us: 1500000, duration_us: 2000000, sticker_id: '7231835412396773944', resource_id: '7231835412396773944', x: 0.28, y: -0.30, scale: 0.8 },
+      { start_us: 10500000, duration_us: 2000000, sticker_id: '7397035364310848051', resource_id: '7397035364310848051', x: -0.28, y: 0.30, scale: 0.8 },
+      { start_us: 26500000, duration_us: 2500000, sticker_id: '7231835658950545976', resource_id: '7231835658950545976', x: 0.0, y: -0.32, scale: 0.9 },
+    ]},
   ],
 };
 writeFileSync(join(dir, 'plan.json'), JSON.stringify(plan, null, 2) + '\n');

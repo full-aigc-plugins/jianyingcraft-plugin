@@ -9,5 +9,5 @@
 - `subs.srt`：6 条字幕
 - `make-plan.mjs`：生成器（改镜头/滤镜/特效后重跑）
 
-> 贴纸在 `script.md` 里只是设计（当前 CLI 无贴纸目录），执行状态表里标为 planned；
+> 贴纸使用 `catalogs/local-stickers.json` 里的本机资源 id（名称/画面由剪映按 id 拉取）；
 > 预览 `render proxy` 不渲染转场/滤镜/特效，且图片轨可能只取首帧，权威画面以草稿在剪映里为准。

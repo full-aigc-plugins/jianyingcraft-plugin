@@ -1,0 +1,169 @@
+{
+    "source":  "local JianYing Cache/effect InfoSticker packages",
+    "note":  "Display names and artwork are server-side; this catalogue lists the ids found in the local cache with neutral local labels. A sticker renders only if the host can resolve/download the resource for that id.",
+    "count":  18,
+    "stickers":  [
+                     {
+                         "name":  "本地贴纸 01",
+                         "resource_id":  "7202575978646737469",
+                         "effect_id":  "7202575978646737469",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  78.5,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 02",
+                         "resource_id":  "7202576698775179837",
+                         "effect_id":  "7202576698775179837",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  38.9,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 03",
+                         "resource_id":  "7216624865233605178",
+                         "effect_id":  "7216624865233605178",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 04",
+                         "resource_id":  "7226239683078918712",
+                         "effect_id":  "7226239683078918712",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 05",
+                         "resource_id":  "7226240000730337852",
+                         "effect_id":  "7226240000730337852",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 06",
+                         "resource_id":  "7226240367983596093",
+                         "effect_id":  "7226240367983596093",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 07",
+                         "resource_id":  "7226240439760720421",
+                         "effect_id":  "7226240439760720421",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 08",
+                         "resource_id":  "7226240499487609401",
+                         "effect_id":  "7226240499487609401",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 09",
+                         "resource_id":  "7231834484956467768",
+                         "effect_id":  "7231834484956467768",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 10",
+                         "resource_id":  "7231834666011988517",
+                         "effect_id":  "7231834666011988517",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 11",
+                         "resource_id":  "7231834768910848571",
+                         "effect_id":  "7231834768910848571",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 12",
+                         "resource_id":  "7231834926805422651",
+                         "effect_id":  "7231834926805422651",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 13",
+                         "resource_id":  "7231835018450965051",
+                         "effect_id":  "7231835018450965051",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 14",
+                         "resource_id":  "7231835230057796157",
+                         "effect_id":  "7231835230057796157",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 15",
+                         "resource_id":  "7231835412396773944",
+                         "effect_id":  "7231835412396773944",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 16",
+                         "resource_id":  "7231835591422251576",
+                         "effect_id":  "7231835591422251576",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 17",
+                         "resource_id":  "7231835658950545976",
+                         "effect_id":  "7231835658950545976",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  0.1,
+                         "name_available":  false
+                     },
+                     {
+                         "name":  "本地贴纸 18",
+                         "resource_id":  "7397035364310848051",
+                         "effect_id":  "7397035364310848051",
+                         "vip":  false,
+                         "source":  "local-cache",
+                         "package_kb":  100.9,
+                         "name_available":  false
+                     }
+                 ]
+}

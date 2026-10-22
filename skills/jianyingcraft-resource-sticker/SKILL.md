@@ -158,3 +158,25 @@ license: Apache-2.0
 - 不要用 `graphics.newShape` 画一个星星就说是「撒星星」贴纸；形状和素材是两回事。
 - 不要在没有透明 PNG 时用白色背景图硬叠。
 - 不要让贴纸压住字幕或人物眼睛。
+
+## 本地贴纸目录（`catalogs/local-stickers.json`）
+
+本机剪映的 `User Data/Cache/effect` 里，`config.json` 的 `effect.Link[].type` 为 `InfoSticker` 的目录
+就是已下载/占位的贴纸资源，目录名即 `resource_id`。插件仓的 `catalogs/local-stickers.json` 由这些
+id 生成：
+
+- 字段：`name`（本地标签「本地贴纸 NN」）、`resource_id`/`effect_id`、`package_kb`、`name_available`;
+- **官方显示名与素材在服务端**，本机缓存里通常没有名称、甚至只有 0KB 占位。因此该目录只能保证
+  「编号存在」，不保证画面能离线显示；渲染依赖宿主在打开草稿时按 id 拉取资源。
+- 写 plan 时用贴纸轨：
+
+```json
+{"type":"sticker","name":"贴纸","segments":[
+  {"start_us":1500000,"duration_us":2000000,
+   "sticker_id":"7231835412396773944","resource_id":"7231835412396773944",
+   "x":0.28,"y":-0.30,"scale":0.8}
+]}
+```
+
+- 在剪映里打开草稿后若贴纸空白，说明该 id 的资源没有下载：先在剪映里下载一次该贴纸，再重建草稿；
+- 不要给贴纸编造官方名称：目录里标 `name_available: false`，技能输出里写「本地贴纸 NN」并注明编号。

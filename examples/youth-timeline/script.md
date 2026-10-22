@@ -54,16 +54,16 @@
 
 | 类别 | 状态 | 落盘位置 |
 |---|---|---|
-| 素材 | ✅ 12 段（6 图 × 2 次，不同 scale） | `draft-youth-v2/draft_content.json` 主视频轨 |
+| 素材 | ✅ 12 段（6 图 × 2 次，不同 scale） | `draft-youth-v3/draft_content.json` 主视频轨 |
 | 滤镜 | ✅ 12 段，6 种（清新/日系奶油/夏日风吟/清晰明亮/夏日小美好/清新漫和） | 每段 `filters[].name+intensity`；草稿落在 `materials.effects[]`（剪映把滤镜存进 effects） |
 | 特效 | ✅ 12 段，6 种（光晕/仙尘闪闪/丁达尔光线/光斑飘落/光斑虚化/CCD闪光） | 每段 `effects[]`；草稿落在 `materials.video_effects[]` |
 | 文本/花字 | ✅ 3 条（18岁的夏天 / 少年不散场 / 致我们），含入场/出场动画 | 独立 text 轨 |
-| 贴纸 | ✅ 3 个（本地贴纸 05/18/17，resource_id 已落盘）；官方名称与画面依赖剪映按 id 拉取，本机包多为 0KB 占位 | sticker 轨（`draft-youth-v3`） |
+| 贴纸 | ✅ 3 个（本地贴纸 05/18/17，resource_id 已落盘）；官方名称与画面依赖剪映按 id 拉取，本机包多为 0KB 占位 | `draft-youth-v3` sticker 轨 |
 | 音频 | ✅ BGM 1 段 + 音效 3 段（whoosh/riser/sparkle，现场合成，无版权风险） | audio 轨 ×2 |
 | 转场 | ✅ 5 个（叠化/泛白/渐变擦除/星星/拉远，各 800ms） | 第 1/3/5/7/9 段 `transition_out` |
 | 字幕 | ✅ 6 条 SRT（烧录版 + 草稿字幕轨） | `--srt subs/youth.srt` |
 
-`project verify`：**30.0s / 5 轨 / 25 段 / issues=[]**。\n\n> 预览渲染的限制：`render proxy` 是 ffmpeg 平铺主轨的近似预览，当前版本在同一条图片轨上只取第一张静帧铺满全片（且不渲染转场/滤镜/特效）。所以 `renders/youth-v2.mp4` 只用于检查字幕/花字时间轴，**权威画面请把 `draft-youth-v2` 拷入剪映草稿库查看/导出**。
+`project verify`（`draft-youth-v3`）：**30.0s / 6 轨 / 28 段 / issues=[]**。\n\n> 预览渲染的限制：`render proxy` 是 ffmpeg 平铺主轨的近似预览，当前版本在同一条图片轨上只取第一张静帧铺满全片（且不渲染转场/滤镜/特效）。所以 `renders/youth-v2.mp4` 只用于检查字幕/花字时间轴，**权威画面请把 `draft-youth-v2` 拷入剪映草稿库查看/导出**。
 
 ## 五、资源编号（本片实际使用）
 

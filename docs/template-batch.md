@@ -119,3 +119,26 @@ node tools/variant-batch.mjs templates/a.json,templates/b.json,templates/c.json 
 
 `build`/`verify` 失败直接 `score=0`。评分是**结构规则**，不是画面审美；抽帧视觉评分需要
 可靠的成片渲染（当前 `render proxy` 只渲染近似），留作后续。
+## 自动调优（分数不达标就重跑）
+
+```powershell
+node tools/auto-tune.mjs templates/hardcut.json,templates/default.json,templates/flow.json stories.json `
+  --out out --threshold 95 --attempts 3
+```
+
+逻辑：
+
+1. 每条故事按顺序尝试模板（第 i 次尝试 = 第 `i % 模板数` 个模板），`variation_seed += 11i`；
+2. 每次只把该故事写进临时 stories 文件，调用 `template-batch` 生成并评分；
+3. 分数 ≥ 阈值立即停止；否则继续；
+4. 全部尝试完仍不达标时保留最高分草稿，并在 `auto-tune-summary.json` 标记 `met:false`，进程退出码 1。
+
+实测（hardcut 90 分 → default 100 分）：
+
+| 故事 | 尝试 0 | 尝试 1 | 结果 |
+|---|---|---|---|
+| 毕业那天（3 镜） | hardcut 90 | default 100 | met |
+| 夏日操场（3 镜） | hardcut 90 | default 100 | met |
+| 晚霞与少年（2 镜） | hardcut 100 | — | met |
+
+自动调优目前只换模板/换 seed，不改故事本身（比如给某镜补文案/补贴纸）；这类“改内容”留给人或上层 agent。

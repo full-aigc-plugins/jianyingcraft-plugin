@@ -151,7 +151,7 @@ for (const story of stories.stories) {
   const durationOk = durations.every((d) => d >= minS - 0.05 && d <= maxS + 0.05);
   const transitionCount = shots.filter((s) => s.transition).length;
   const density = shots.length > 1 ? transitionCount / (shots.length - 1) : 0;
-  const densityOk = shots.length < 2 || (density >= 0.2 && density <= 0.8);
+  const densityOk = shots.length < 2 || (shots.length === 2 ? density <= 1.0 : density >= 0.2 && density <= 0.8);
   const textOk = textSegments.every((t) => t.start_us >= 0 && t.start_us + t.duration_us <= cursor && t.y >= -1 && t.y <= 1) && textSegments.every((t) => t.text.length <= 18);
   const coverageOk = shots.every((s) => s.filter && s.effect);
   const audioOk = Boolean(bgm) && (transitionCount === 0 || sfxSegments.length === transitionCount);

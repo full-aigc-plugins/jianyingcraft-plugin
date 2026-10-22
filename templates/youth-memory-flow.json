@@ -1,0 +1,94 @@
+{
+    "schema":  "jianyingcraft-template/v1",
+    "id":  "youth-memory-flow",
+    "name":  "青春回忆·流动（每镜转场）",
+    "canvas":  {
+                   "width":  1080,
+                   "height":  1920,
+                   "fps":  30
+               },
+    "pacing":  {
+                   "min_shot_s":  2.4,
+                   "max_shot_s":  3.6
+               },
+    "palette":  {
+                    "filters":  [
+                                    "清新",
+                                    "日系奶油",
+                                    "夏日风吟",
+                                    "清晰明亮",
+                                    "夏日小美好",
+                                    "清新漫和"
+                                ],
+                    "effects":  [
+                                    "光晕",
+                                    "仙尘闪闪",
+                                    "丁达尔光线",
+                                    "光斑飘落",
+                                    "光斑虚化",
+                                    "CCD闪光"
+                                ],
+                    "transitions":  [
+                                        "叠化",
+                                        "渐变擦除",
+                                        "拉远",
+                                        "泛白"
+                                    ]
+                },
+    "rules":  {
+                  "transition_every_n":  1,
+                  "alternate_scale":  [
+                                          1.0,
+                                          1.12
+                                      ],
+                  "rotate_filters":  true,
+                  "rotate_effects":  true,
+                  "background_filling":  {
+                                             "type":  "blur",
+                                             "blur":  0.0625
+                                         }
+              },
+    "text":  {
+                 "font":  "优设标题圆",
+                 "title_size":  18,
+                 "title_y":  -0.12,
+                 "color":  "#FFFFFF",
+                 "border_color":  "#000000",
+                 "border_width":  40,
+                 "animation_pool":  [
+                                        "变色输入",
+                                        "右上弹入"
+                                    ]
+             },
+    "audio":  {
+                  "volume":  0.85,
+                  "fade":  {
+                               "in_us":  500000,
+                               "out_us":  900000
+                           },
+                  "bgm_pool":  [
+                                   "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-30s.wav",
+                                   "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-warm.wav",
+                                   "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-punch.wav"
+                               ],
+                  "sfx":  {
+                              "volume":  0.5,
+                              "offset_ms":  -250,
+                              "duration_us":  700000,
+                              "pool":  [
+                                           {
+                                               "name":  "whoosh",
+                                               "path":  "E:/workspaces/jianyingcraft-work/youth-video/audio/whoosh.wav"
+                                           },
+                                           {
+                                               "name":  "riser",
+                                               "path":  "E:/workspaces/jianyingcraft-work/youth-video/audio/riser.wav"
+                                           },
+                                           {
+                                               "name":  "sparkle",
+                                               "path":  "E:/workspaces/jianyingcraft-work/youth-video/audio/sparkle.wav"
+                                           }
+                                       ]
+                          }
+              }
+}

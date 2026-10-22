@@ -92,5 +92,5 @@ node tools/batch-build.mjs batch.json --out E:\work\batch-demo
 
 - 模板可配 `audio.bgm_pool` 与 `sfx`（按转场自动放音效）；
 - A/B：`tools/variant-batch.mjs a.json,b.json,c.json stories.json --out out`；
-- 评分：summary 里每条草稿带 `score/checks`（时长、转场密度、字幕安全、风格覆盖、音频）；
+- 评分：summary 里每条草稿带 `score/checks`（时长、转场密度、字幕安全、风格覆盖、音频）；\n- 自动调优：`tools/auto-tune.mjs a.json,b.json stories.json --threshold 95`，低分自动换模板/seed 重跑；
 - 详见 `docs/template-batch.md` 与 `examples/template-batch/`。

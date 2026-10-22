@@ -1,0 +1,15 @@
+{
+  "schema": "jianyingcraft-stories/v1",
+  "template": "youth-memory",
+  "stories": [
+    { "id": "graduation-day", "title": "毕业那天", "variation_seed": 3, "duration_s": 9,
+      "lines": ["最后一次穿校服", "把帽子抛向天空", "我们后会有期"],
+      "images": ["E:/workspaces/jianyingcraft-work/youth-video/media/cut-11.webp","E:/workspaces/jianyingcraft-work/youth-video/media/cut-06.jpg","E:/workspaces/jianyingcraft-work/youth-video/media/cut-05.jpg"] },
+    { "id": "summer-playground", "title": "夏日操场", "variation_seed": 7, "duration_s": 9,
+      "lines": ["风从跑道吹过来", "球进的那一刻", "整个夏天都亮了"],
+      "images": ["E:/workspaces/jianyingcraft-work/youth-video/media/cut-01.jpg","E:/workspaces/jianyingcraft-work/youth-video/media/cut-03.jpg","E:/workspaces/jianyingcraft-work/youth-video/media/cut-04.jpg"] },
+    { "id": "sunset-boy", "title": "晚霞与少年", "variation_seed": 11, "duration_s": 6,
+      "lines": ["偷走一片晚霞", "藏进明天"],
+      "images": ["E:/workspaces/jianyingcraft-work/youth-video/media/cut-05.jpg","E:/workspaces/jianyingcraft-work/youth-video/media/cut-01.jpg"] }
+  ]
+}

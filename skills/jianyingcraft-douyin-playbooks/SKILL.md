@@ -80,3 +80,13 @@ node tools/batch-build.mjs batch.json --out E:\work\batch-demo
 ## 5. 参考
 
 本技能的 playbook 参数是**工程经验 + 平台公开教程的抽象**，不是抖音官方规则；平台算法/时长/审核规则会变，发布前按最新规则复核。
+## 6. 模板批量（同风格、多故事）
+
+批量复制不是复制文件，而是**同一模板 + N 个故事**：
+
+- `templates/youth-memory.json`：风格（画幅、节奏、滤镜/特效/转场池、文字样式、音频）；
+- `stories.json`：每个故事只给 `title / lines / images / variation_seed`；
+- `tools/template-batch.mjs template.json stories.json --out <dir>`：逐条生成、build、verify；
+- 同一模板下滤镜/特效/转场按 seed 轮换，保证「风格一致、细节不同」。
+
+详见 `docs/template-batch.md` 与 `examples/template-batch/`。

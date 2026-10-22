@@ -24,7 +24,7 @@ if (stories.schema !== 'jianyingcraft-stories/v1' || !Array.isArray(stories.stor
 const { canvas, palette, rules, text, audio } = template;
 const tick = 1_000_000 / canvas.fps;
 const hash = (s) => { let h = 2166136261; for (const c of s) h = (h ^ c.charCodeAt(0)) * 16777619 >>> 0; return h >>> 0; };
-const frame = (us) => Math.max(Math.round(us / tick) * tick, tick);
+const frame = (us) => { const frames = Math.max(1, Math.round((us * canvas.fps) / 1_000_000)); return Math.round((frames * 1_000_000) / canvas.fps); };
 const srtTime = (us) => {
   const ms = Math.round(us / 1000); const p = (n, w = 2) => String(n).padStart(w, '0');
   return p(Math.floor(ms / 3600000)) + ':' + p(Math.floor((ms % 3600000) / 60000)) + ':' + p(Math.floor((ms % 60000) / 1000)) + ',' + p(ms % 1000, 3);
@@ -42,11 +42,14 @@ for (const story of stories.stories) {
   const pick = (arr, i) => arr[(seed + i) % arr.length];
 
   // 统一成 shot 列表：图片均分或逐镜定义
+  const minS = template.pacing?.min_shot_s ?? 1.5;
+  const maxS = template.pacing?.max_shot_s ?? 4.0;
+  const midS = Math.round(((minS + maxS) / 2) * 10) / 10;
   const baseShotUs = story.duration_s && (hasShots ? false : true) ? frame((story.duration_s * 1_000_000) / images.length) : null;
   const sourceShots = hasShots ? story.shots : images.map((image) => ({ image }));
   let cursor = 0;
   const shots = sourceShots.map((s, i) => {
-    const dur = frame((Number(s.duration_s) || (baseShotUs ? baseShotUs / 1_000_000 : 2.5)) * 1_000_000);
+    const dur = frame((Number(s.duration_s) || (baseShotUs ? baseShotUs / 1_000_000 : midS)) * 1_000_000);
     const shot = { ...s, index: i, start_us: cursor, duration_us: dur };
     cursor += dur;
     return shot;
@@ -101,8 +104,24 @@ for (const story of stories.stories) {
 
   const tracks = [{ type: 'video', name: '主视频', segments }];
   if (overlaySegments.length) tracks.push({ type: 'video', name: '贴纸图层(PNG)', segments: overlaySegments });
-  const bgm = story.bgm || audio.bgm;
+  const bgmPool = Array.isArray(audio.bgm_pool) ? audio.bgm_pool : [];
+  const bgm = story.bgm || (bgmPool.length ? bgmPool[seed % bgmPool.length] : audio.bgm);
   if (bgm) tracks.push({ type: 'audio', name: '背景音乐', segments: [{ start_us: 0, duration_us: cursor, source: resolve(bgm), volume: audio.volume ?? 0.85, fade: audio.fade }] });
+  const sfxCfg = audio.sfx;
+  const sfxSegments = [];
+  if (sfxCfg && Array.isArray(sfxCfg.pool) && sfxCfg.pool.length) {
+    for (const shot of shots) {
+      if (!shot.transition) continue;
+      const cue = sfxCfg.pool[(seed + sfxSegments.length) % sfxCfg.pool.length];
+      sfxSegments.push({
+        start_us: Math.max(0, shot.start_us + shot.duration_us + Math.round((sfxCfg.offset_ms ?? 0) * 1000)),
+        duration_us: sfxCfg.duration_us ?? 700000,
+        source: resolve(cue.path),
+        volume: sfxCfg.volume ?? 0.5,
+      });
+    }
+  }
+  if (sfxSegments.length) tracks.push({ type: 'audio', name: '音效', segments: sfxSegments });
   if (textSegments.length) tracks.push({ type: 'text', name: '花字', segments: textSegments });
 
   const plan = { schema: 'jianying-cli-plan/v1', name: (template.name || '模板') + ' ' + id, canvas, tracks };
@@ -128,7 +147,29 @@ for (const story of stories.stories) {
     try { const j = JSON.parse(verify.stdout); issues = j.data?.issues ?? j.result?.issues ?? null; } catch { issues = null; }
   }
   const ok = build.status === 0 && verify?.status === 0 && Array.isArray(issues) && issues.length === 0;
-  results.push({ id, ok, seed, total_us: cursor, draft: draftDir, plan: planPath, srt: srtPath, issues,
+  const durations = shots.map((s) => s.duration_us / 1_000_000);
+  const durationOk = durations.every((d) => d >= minS - 0.05 && d <= maxS + 0.05);
+  const transitionCount = shots.filter((s) => s.transition).length;
+  const density = shots.length > 1 ? transitionCount / (shots.length - 1) : 0;
+  const densityOk = shots.length < 2 || (density >= 0.2 && density <= 0.8);
+  const textOk = textSegments.every((t) => t.start_us >= 0 && t.start_us + t.duration_us <= cursor && t.y >= -1 && t.y <= 1) && textSegments.every((t) => t.text.length <= 18);
+  const coverageOk = shots.every((s) => s.filter && s.effect);
+  const audioOk = Boolean(bgm) && (transitionCount === 0 || sfxSegments.length === transitionCount);
+  const checks = {
+    duration: { ok: durationOk, detail: durations.map((d) => Math.round(d * 10) / 10) },
+    transition_density: { ok: densityOk, value: Math.round(density * 100) / 100 },
+    subtitles: { ok: textOk, count: textSegments.length, max_chars: Math.max(0, ...textSegments.map((t) => t.text.length)) },
+    style_coverage: { ok: coverageOk },
+    audio: { ok: audioOk, bgm: Boolean(bgm), sfx: sfxSegments.length },
+  };
+  let score = 100;
+  if (!durationOk) score -= 15;
+  if (!densityOk) score -= 10;
+  if (!textOk) score -= 15;
+  if (!coverageOk) score -= 10;
+  if (!audioOk) score -= 5;
+  if (!ok) score = 0;
+  results.push({ id, score, checks, ok, seed, total_us: cursor, draft: draftDir, plan: planPath, srt: srtPath, issues,
     shots: shots.map((s) => ({ index: s.index, start_us: s.start_us, duration_us: s.duration_us, filter: s.filter, effect: s.effect, transition: s.transition, scale: s.scale, text: s.text || null, sticker_png: s.sticker_png ?? null })),
     build_status: build.status, verify_status: verify?.status ?? null });
 }

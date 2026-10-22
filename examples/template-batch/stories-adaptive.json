@@ -1,0 +1,116 @@
+{
+    "schema":  "jianyingcraft-stories/v1",
+    "template":  "youth-memory",
+    "stories":  [
+                    {
+                        "id":  "graduation-day",
+                        "title":  "毕业那天",
+                        "variation_seed":  3,
+                        "bgm":  "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-30s.wav",
+                        "lines":  [
+                                      "最后一次穿校服",
+                                      "把帽子抛向天空",
+                                      "我们后会有期"
+                                  ],
+                        "shots":  [
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-11.webp",
+                                          "filter":  "日系奶油",
+                                          "effect":  "光斑飘落",
+                                          "text":  {
+                                                       "content":  "毕业那天",
+                                                       "start_s":  0.3,
+                                                       "duration_s":  2
+                                                   }
+                                      },
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-06.jpg",
+                                          "effect":  "光晕",
+                                          "transition_out":  "泛白"
+                                      },
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-05.jpg",
+                                          "filter":  "清新",
+                                          "effect":  "CCD闪光",
+                                          "text":  {
+                                                       "content":  "后会有期",
+                                                       "start_s":  0.5
+                                                   },
+                                          "sticker_png":  "E:/workspaces/jianyingcraft-work/youth-video/media/stickers/star.png",
+                                          "sticker":  {
+                                                          "x":  0.3,
+                                                          "y":  0.34,
+                                                          "scale":  0.18
+                                                      }
+                                      }
+                                  ]
+                    },
+                    {
+                        "id":  "summer-playground",
+                        "title":  "夏日操场",
+                        "variation_seed":  7,
+                        "bgm":  "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-30s.wav",
+                        "lines":  [
+                                      "风从跑道吹过来",
+                                      "球进的那一刻",
+                                      "整个夏天都亮了"
+                                  ],
+                        "shots":  [
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-01.jpg",
+                                          "filter":  "清晰明亮",
+                                          "effect":  "丁达尔光线",
+                                          "text":  "夏日操场"
+                                      },
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-03.jpg",
+                                          "effect":  "CCD闪光",
+                                          "transition_out":  "星星",
+                                          "sticker_png":  "E:/workspaces/jianyingcraft-work/youth-video/media/stickers/arrow.png",
+                                          "sticker":  {
+                                                          "x":  -0.28,
+                                                          "y":  0.24,
+                                                          "scale":  0.22
+                                                      }
+                                      },
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-04.jpg",
+                                          "effect":  "光晕",
+                                          "text":  "这个夏天"
+                                      }
+                                  ]
+                    },
+                    {
+                        "id":  "sunset-boy",
+                        "title":  "晚霞与少年",
+                        "variation_seed":  11,
+                        "bgm":  "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-30s.wav",
+                        "lines":  [
+                                      "偷走一片晚霞",
+                                      "藏进明天"
+                                  ],
+                        "shots":  [
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-05.jpg",
+                                          "filter":  "夏日小美好",
+                                          "effect":  "光晕",
+                                          "text":  {
+                                                       "content":  "晚霞",
+                                                       "start_s":  0.4
+                                                   }
+                                      },
+                                      {
+                                          "image":  "E:/workspaces/jianyingcraft-work/youth-video/media/cut-01.jpg",
+                                          "effect":  "光斑虚化",
+                                          "transition_out":  "拉远",
+                                          "sticker_png":  "E:/workspaces/jianyingcraft-work/youth-video/media/stickers/sparkle.png",
+                                          "sticker":  {
+                                                          "x":  0,
+                                                          "y":  -0.36,
+                                                          "scale":  0.2
+                                                      }
+                                      }
+                                  ]
+                    }
+                ]
+}

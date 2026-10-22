@@ -1,0 +1,88 @@
+{
+    "schema":  "jianyingcraft-template/v1",
+    "id":  "youth-memory-soft",
+    "name":  "青春回忆·柔光（慢节奏）",
+    "canvas":  {
+                   "width":  1080,
+                   "height":  1920,
+                   "fps":  30
+               },
+    "pacing":  {
+                   "min_shot_s":  3,
+                   "max_shot_s":  4.5
+               },
+    "palette":  {
+                    "filters":  [
+                                    "日系奶油",
+                                    "清新漫和",
+                                    "夏日小美好",
+                                    "清晰明亮"
+                                ],
+                    "effects":  [
+                                    "光晕",
+                                    "光斑虚化",
+                                    "仙尘闪闪"
+                                ],
+                    "transitions":  [
+                                        "叠化",
+                                        "拉远",
+                                        "渐变擦除"
+                                    ]
+                },
+    "rules":  {
+                  "transition_every_n":  3,
+                  "alternate_scale":  [
+                                          1.0,
+                                          1.12
+                                      ],
+                  "rotate_filters":  true,
+                  "rotate_effects":  true,
+                  "background_filling":  {
+                                             "type":  "blur",
+                                             "blur":  0.0625
+                                         }
+              },
+    "text":  {
+                 "font":  "兰亭圆",
+                 "title_size":  17,
+                 "title_y":  -0.12,
+                 "color":  "#FFFFFF",
+                 "border_color":  "#000000",
+                 "border_width":  40,
+                 "animation_pool":  [
+                                        "变色输入",
+                                        "右上弹入",
+                                        "向上擦除"
+                                    ]
+             },
+    "audio":  {
+                  "volume":  0.85,
+                  "fade":  {
+                               "in_us":  500000,
+                               "out_us":  900000
+                           },
+                  "bgm_pool":  [
+                                   "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-warm.wav",
+                                   "E:/workspaces/jianyingcraft-work/youth-video/audio/bgm-youth-30s.wav"
+                               ],
+                  "sfx":  {
+                              "volume":  0.5,
+                              "offset_ms":  -250,
+                              "duration_us":  700000,
+                              "pool":  [
+                                           {
+                                               "name":  "whoosh",
+                                               "path":  "E:/workspaces/jianyingcraft-work/youth-video/audio/whoosh.wav"
+                                           },
+                                           {
+                                               "name":  "riser",
+                                               "path":  "E:/workspaces/jianyingcraft-work/youth-video/audio/riser.wav"
+                                           },
+                                           {
+                                               "name":  "sparkle",
+                                               "path":  "E:/workspaces/jianyingcraft-work/youth-video/audio/sparkle.wav"
+                                           }
+                                       ]
+                          }
+              }
+}

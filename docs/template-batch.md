@@ -78,3 +78,44 @@
 
 实测同一模板 + 3 条逐镜故事：`3 ok: 3 failed: 0`，`issues` 均为空；每条故事可完全不同滤镜/特效/转场/文案，
 但画幅、节奏、字体、调色池一致。
+## 音频池与自动音效
+
+模板的 `audio` 支持：
+
+```jsonc
+"audio": {
+  "volume": 0.85,
+  "fade": { "in_us": 500000, "out_us": 900000 },
+  "bgm_pool": [".../bgm-soft.wav", ".../bgm-warm.wav", ".../bgm-punch.wav"],
+  "sfx": { "volume": 0.5, "offset_ms": -250, "duration_us": 700000,
+           "pool": [ {"name":"whoosh","path":".../whoosh.wav"}, {"name":"riser","path":".../riser.wav"} ] }
+}
+```
+
+- BGM 按 `seed % bgm_pool.length` 选曲，故事里的 `bgm` 可覆盖；
+- 每个转场自动放一个音效（在切点前 `offset_ms` 起播），音效从 `sfx.pool` 轮换；
+- 故事不写 `duration_s` 时，镜头时长取模板 `pacing` 的中值，因此同一批故事套慢/快模板会自动变节奏。
+
+## A/B 模板变体
+
+```powershell
+node tools/variant-batch.mjs templates/a.json,templates/b.json,templates/c.json stories.json --out out
+```
+
+每个模板独立生成一套草稿，`variants-summary.json` 汇总每条故事的分数与通过情况。实测三套模板
+（默认 2.5s / 柔光 3.8s / 卡点 1.6s）各 3 条故事，全部 `issues=[]`，平均分 97。
+
+## 规则评分
+
+每条草稿在 summary 里带 `score` 与 `checks`：
+
+| 检查 | 规则 | 扣分 |
+|---|---|---|
+| 镜头时长 | 落在模板 `pacing` 内（±0.05s） | -15 |
+| 转场密度 | 转场数 / (镜头数-1) 在 0.2–0.8 | -10 |
+| 字幕安全 | 文本在时间轴内、y∈[-1,1]、单行 ≤18 字 | -15 |
+| 风格覆盖 | 每个镜头都有滤镜与特效 | -10 |
+| 音频 | 有 BGM，且转场数 = 音效数 | -5 |
+
+`build`/`verify` 失败直接 `score=0`。评分是**结构规则**，不是画面审美；抽帧视觉评分需要
+可靠的成片渲染（当前 `render proxy` 只渲染近似），留作后续。

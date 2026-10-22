@@ -159,10 +159,10 @@ license: Apache-2.0
 - 不要在没有透明 PNG 时用白色背景图硬叠。
 - 不要让贴纸压住字幕或人物眼睛。
 
-## 本地贴纸目录（`catalogs/local-stickers.json`）
+## 本地贴纸目录（`catalogs/local_stickers.json`）
 
-本机剪映的 `User Data/Cache/effect` 里，`config.json` 的 `effect.Link[].type` 为 `InfoSticker` 的目录
-就是已下载/占位的贴纸资源，目录名即 `resource_id`。插件仓的 `catalogs/local-stickers.json` 由这些
+本机剪映的 `User Data/Cache/effect` 里，`config` 文件里的 `effect.Link[].type` 为 `InfoSticker` 的目录
+就是已下载/占位的贴纸资源，目录名即 `resource_id`。插件仓的 `catalogs/local_stickers.json` 由这些
 id 生成：
 
 - 字段：`name`（本地标签「本地贴纸 NN」）、`resource_id`/`effect_id`、`package_kb`、`name_available`;

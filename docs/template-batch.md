@@ -53,3 +53,28 @@
 - 当前是「整条共用一套文本/音频规则」；逐镜文案、逐镜贴纸需要把 `shots[]` 加进 story；
 - 模板池目前是固定名字，换风格 = 换模板文件，不改代码；
 - 预览 `render proxy` 是近似，权威画面以草稿在剪映里为准。
+## 逐镜覆盖（`shots[]`）
+
+故事里可以不用 `images`，改用 `shots`，每个镜头单独覆盖风格参数：
+
+```jsonc
+"shots": [
+  { "image": "a.webp", "duration_s": 3, "filter": "胶片", "effect": "光斑飘落",
+    "text": { "content": "毕业那天", "start_s": 0.3, "duration_s": 2 } },
+  { "image": "b.jpg", "duration_s": 3, "effect": "光晕", "transition_out": "泛白" },
+  { "image": "c.jpg", "duration_s": 3, "effect": "CCD闪光",
+    "text": { "content": "后会有期", "start_s": 0.5 },
+    "sticker_png": "stickers/star.png", "sticker": { "x": 0.3, "y": 0.34, "scale": 0.18 } }
+]
+```
+
+规则：
+
+- `filter` / `effect` / `scale` 省略时按模板轮换；
+- `transition_out`：字符串显式指定，`null` 表示硬切；**最后一个镜头不允许转场**（自动忽略）；
+- `text`：字符串或 `{content,start_s,duration_s}`，自动夹在本镜时长内；
+- 有逐镜文案时**不再叠加全局标题**，避免文本轨重叠；
+- `sticker_png` + `sticker{x,y,scale}`：用户自己的透明 PNG 作为叠加图层，离线可用。
+
+实测同一模板 + 3 条逐镜故事：`3 ok: 3 failed: 0`，`issues` 均为空；每条故事可完全不同滤镜/特效/转场/文案，
+但画幅、节奏、字体、调色池一致。

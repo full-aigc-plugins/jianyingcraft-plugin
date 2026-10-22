@@ -1,0 +1,406 @@
+{
+  "schema": "jianying-cli-plan/v1",
+  "name": "青春·少年时 v2",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "tracks": [
+    {
+      "type": "video",
+      "name": "主视频",
+      "segments": [
+        {
+          "start_us": 0,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-01.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1,
+          "filters": [
+            {
+              "name": "清新",
+              "intensity": 55
+            }
+          ],
+          "effects": [
+            {
+              "name": "光晕",
+              "params": {}
+            }
+          ]
+        },
+        {
+          "start_us": 2500000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-02.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1.12,
+          "filters": [
+            {
+              "name": "日系奶油",
+              "intensity": 70
+            }
+          ],
+          "effects": [
+            {
+              "name": "仙尘闪闪",
+              "params": {}
+            }
+          ],
+          "transition_out": {
+            "name": "叠化",
+            "duration_us": 800000
+          }
+        },
+        {
+          "start_us": 5000000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-03.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1,
+          "filters": [
+            {
+              "name": "夏日风吟",
+              "intensity": 55
+            }
+          ],
+          "effects": [
+            {
+              "name": "丁达尔光线",
+              "params": {}
+            }
+          ]
+        },
+        {
+          "start_us": 7500000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-04.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1.1,
+          "filters": [
+            {
+              "name": "清晰明亮",
+              "intensity": 70
+            }
+          ],
+          "effects": [
+            {
+              "name": "光斑飘落",
+              "params": {}
+            }
+          ],
+          "transition_out": {
+            "name": "泛白",
+            "duration_us": 800000
+          }
+        },
+        {
+          "start_us": 10000000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-05.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1,
+          "filters": [
+            {
+              "name": "夏日小美好",
+              "intensity": 55
+            }
+          ],
+          "effects": [
+            {
+              "name": "光晕",
+              "params": {}
+            }
+          ]
+        },
+        {
+          "start_us": 12500000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-06.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1.14,
+          "filters": [
+            {
+              "name": "清新漫和",
+              "intensity": 70
+            }
+          ],
+          "effects": [
+            {
+              "name": "光斑虚化",
+              "params": {}
+            }
+          ],
+          "transition_out": {
+            "name": "渐变擦除",
+            "duration_us": 800000
+          }
+        },
+        {
+          "start_us": 15000000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-07.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1,
+          "filters": [
+            {
+              "name": "清晰明亮",
+              "intensity": 55
+            }
+          ],
+          "effects": [
+            {
+              "name": "CCD闪光",
+              "params": {}
+            }
+          ]
+        },
+        {
+          "start_us": 17500000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-08.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1.08,
+          "filters": [
+            {
+              "name": "清新",
+              "intensity": 70
+            }
+          ],
+          "effects": [
+            {
+              "name": "丁达尔光线",
+              "params": {}
+            }
+          ],
+          "transition_out": {
+            "name": "星星",
+            "duration_us": 800000
+          }
+        },
+        {
+          "start_us": 20000000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-09.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1,
+          "filters": [
+            {
+              "name": "日系奶油",
+              "intensity": 55
+            }
+          ],
+          "effects": [
+            {
+              "name": "仙尘闪闪",
+              "params": {}
+            }
+          ]
+        },
+        {
+          "start_us": 22500000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-10.jpg",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1.12,
+          "filters": [
+            {
+              "name": "夏日风吟",
+              "intensity": 70
+            }
+          ],
+          "effects": [
+            {
+              "name": "光晕",
+              "params": {}
+            }
+          ],
+          "transition_out": {
+            "name": "拉远",
+            "duration_us": 800000
+          }
+        },
+        {
+          "start_us": 25000000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-11.webp",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1,
+          "filters": [
+            {
+              "name": "清新",
+              "intensity": 55
+            }
+          ],
+          "effects": [
+            {
+              "name": "光斑飘落",
+              "params": {}
+            }
+          ]
+        },
+        {
+          "start_us": 27500000,
+          "duration_us": 2500000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\media\\cut-12.webp",
+          "background_filling": {
+            "type": "blur",
+            "blur": 0.0625
+          },
+          "scale": 1.06,
+          "filters": [
+            {
+              "name": "清晰明亮",
+              "intensity": 70
+            }
+          ],
+          "effects": [
+            {
+              "name": "光晕",
+              "params": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "audio",
+      "name": "背景音乐",
+      "segments": [
+        {
+          "start_us": 0,
+          "duration_us": 30000000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\audio\\bgm-youth-30s.wav",
+          "volume": 0.85,
+          "fade": {
+            "in_us": 500000,
+            "out_us": 900000
+          }
+        }
+      ]
+    },
+    {
+      "type": "audio",
+      "name": "音效",
+      "segments": [
+        {
+          "start_us": 2400000,
+          "duration_us": 600000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\audio\\whoosh.wav",
+          "volume": 0.5
+        },
+        {
+          "start_us": 9600000,
+          "duration_us": 800000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\audio\\riser.wav",
+          "volume": 0.45
+        },
+        {
+          "start_us": 24700000,
+          "duration_us": 1000000,
+          "source": "E:\\workspaces\\jianyingcraft-work\\youth-video\\audio\\sparkle.wav",
+          "volume": 0.5
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "花字",
+      "segments": [
+        {
+          "start_us": 600000,
+          "duration_us": 1800000,
+          "text": "18岁的夏天",
+          "size": 18,
+          "x": 0,
+          "y": -0.12,
+          "color": "#FFFFFF",
+          "border_color": "#000000",
+          "border_width": 40,
+          "bold": true,
+          "font": "优设标题圆",
+          "animation_in": {
+            "name": "变色输入",
+            "duration_us": 600000
+          },
+          "animation_out": {
+            "name": "向上擦除",
+            "duration_us": 500000
+          }
+        },
+        {
+          "start_us": 10500000,
+          "duration_us": 1800000,
+          "text": "少年不散场",
+          "size": 16,
+          "x": 0,
+          "y": -0.1,
+          "color": "#FFFFFF",
+          "border_color": "#1A1A1A",
+          "border_width": 35,
+          "bold": true,
+          "font": "优设标题圆",
+          "animation_in": {
+            "name": "右上弹入",
+            "duration_us": 600000
+          }
+        },
+        {
+          "start_us": 26800000,
+          "duration_us": 2400000,
+          "text": "致我们",
+          "size": 20,
+          "x": 0,
+          "y": -0.06,
+          "color": "#FFFFFF",
+          "border_color": "#000000",
+          "border_width": 45,
+          "bold": true,
+          "font": "优设标题圆",
+          "animation_in": {
+            "name": "变色输入",
+            "duration_us": 700000
+          },
+          "animation_out": {
+            "name": "向上溶解",
+            "duration_us": 600000
+          }
+        }
+      ]
+    }
+  ]
+}

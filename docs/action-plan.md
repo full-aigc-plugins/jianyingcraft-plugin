@@ -359,3 +359,8 @@ flowchart LR
 
 精确落剪映编号的路径是宿主侧 jianying-cli（`engine_cli_run`），
 它写的是剪映草稿，不会同步到可见面板的 `.fcproj`；两条路径不要互相冒充。
+
+
+## 参考：分镜时间轴技能
+
+写 action plan 前，先用 `jianyingcraft-shot-timeline` 技能把每个镜头写成八类资源同表（素材/滤镜/特效/文本/贴纸/音频/转场/字幕），再逐条映射到本文件的 action 字段；贴纸等没有目录的类别必须标 `planned`，不得假装已落盘。

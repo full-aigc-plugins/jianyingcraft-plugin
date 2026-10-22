@@ -87,7 +87,8 @@ node tools/batch-build.mjs batch.json --out E:\work\batch-demo
 - `templates/youth-memory.json`：风格（画幅、节奏、滤镜/特效/转场池、文字样式、音频）；
 - `stories.json`：每个故事只给 `title / lines / images / variation_seed`；
 - `tools/template-batch.mjs template.json stories.json --out <dir>`：逐条生成、build、verify；
-- 同一模板下滤镜/特效/转场按 seed 轮换，保证「风格一致、细节不同」；\n- 需要逐镜差异时，故事改用 `shots[]`（每镜可覆盖 filter/effect/transition/text/sticker_png），规则见 docs/template-batch.md。
+- 同一模板下滤镜/特效/转场按 seed 轮换，保证「风格一致、细节不同」；
+- 需要逐镜差异时，故事改用 `shots[]`（每镜可覆盖 filter/effect/transition/text/sticker_png），规则见 docs/template-batch.md。
 
 - 模板可配 `audio.bgm_pool` 与 `sfx`（按转场自动放音效）；
 - A/B：`tools/variant-batch.mjs a.json,b.json,c.json stories.json --out out`；
